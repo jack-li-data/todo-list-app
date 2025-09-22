@@ -39,12 +39,6 @@ export default function AddTaskForm({ onAdd, isLoading = false }: AddTaskFormPro
     }
   }
 
-  const priorityColors = {
-    [Priority.LOW]: 'bg-green-100 text-green-800 border-green-300',
-    [Priority.MEDIUM]: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-    [Priority.HIGH]: 'bg-red-100 text-red-800 border-red-300'
-  }
-
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 mb-6">
       <h2 className="text-xl font-semibold text-gray-800 mb-4">Add New Task</h2>

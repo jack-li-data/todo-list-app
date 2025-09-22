@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || ''
 
     // Build where clause based on filter
-    let where: any = {}
+    const where: Record<string, unknown> = {}
     
     if (filter === 'active') {
       where.completed = false
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Build order by clause based on sort
-    let orderBy: any = {}
+    const orderBy: Record<string, string> = {}
     
     switch (sort) {
       case 'title':

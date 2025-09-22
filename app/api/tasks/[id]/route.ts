@@ -4,11 +4,12 @@ import { UpdateTaskRequest } from '@/types/task'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const task = await prisma.task.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!task) {
@@ -30,14 +31,15 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body: UpdateTaskRequest = await request.json()
 
     // Check if task exists
     const existingTask = await prisma.task.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!existingTask) {
@@ -48,7 +50,7 @@ export async function PUT(
     }
 
     // Build update data
-    const updateData: any = {}
+    const updateData: Record<string, unknown> = {}
     
     if (body.title !== undefined) {
       if (body.title.trim() === '') {
@@ -73,7 +75,7 @@ export async function PUT(
     }
 
     const task = await prisma.task.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData
     })
 
@@ -89,12 +91,14 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+    
     // Check if task exists
     const existingTask = await prisma.task.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!existingTask) {
@@ -105,7 +109,7 @@ export async function DELETE(
     }
 
     await prisma.task.delete({
-      where: { id: params.id }
+      where: { id }
     })
 
     return NextResponse.json({ message: 'Task deleted successfully' })
