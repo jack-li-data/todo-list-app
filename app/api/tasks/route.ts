@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { TaskStorage } from '@/lib/taskStorage'
-import { CreateTaskRequest, TaskFilter, TaskSort } from '@/types/task'
-import { Priority } from '@prisma/client'
+import { CreateTaskRequest, TaskFilter, TaskSort, Priority } from '@/types/task'
 
 export async function GET(request: NextRequest) {
   try {

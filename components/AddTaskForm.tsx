@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Priority } from '@prisma/client'
+import { Priority } from '@/types/task'
 import { CreateTaskRequest } from '@/types/task'
 
 interface AddTaskFormProps {

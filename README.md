@@ -17,8 +17,8 @@ A full-featured, modern to-do list application built with Next.js, TypeScript, P
 
 - **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
 - **Backend**: Next.js API routes
-- **Database**: SQLite with Prisma ORM
-- **Deployment**: Vercel
+- **Storage**: In-memory storage (demo-ready, easily upgradeable to database)
+- **Deployment**: Vercel-optimized
 - **Styling**: Tailwind CSS with responsive design
 
 ## Getting Started
@@ -41,17 +41,14 @@ cd todo-list
 npm install
 ```
 
-3. Set up the database:
-```bash
-npx prisma db push
-```
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+**Note**: This version uses in-memory storage for demo purposes. Data resets on server restart.
 
 ## Deployment to Vercel
 
@@ -77,11 +74,11 @@ vercel
 
 ### Environment Variables
 
-No additional environment variables are required for basic deployment. The app uses SQLite which is suitable for small to medium applications.
+No environment variables are required for this demo version.
 
-For production with PostgreSQL, add:
+For production database integration, you would add:
 ```
-DATABASE_URL="postgresql://username:password@localhost:5432/todolist?schema=public"
+DATABASE_URL="your-database-connection-string"
 ```
 
 ## API Routes

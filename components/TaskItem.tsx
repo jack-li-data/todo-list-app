@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Task, UpdateTaskRequest } from '@/types/task'
-import { Priority } from '@prisma/client'
+import { Task, UpdateTaskRequest, Priority } from '@/types/task'
 
 interface TaskItemProps {
   task: Task

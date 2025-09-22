@@ -1,5 +1,4 @@
-import { Task, CreateTaskRequest, UpdateTaskRequest } from '@/types/task'
-import { Priority } from '@prisma/client'
+import { Task, CreateTaskRequest, Priority } from '@/types/task'
 
 // In-memory storage for demo purposes
 // In production, replace this with a proper database
