@@ -166,13 +166,13 @@ export default function Home() {
         </motion.div>
 
         {/* Main Content */}
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Add Task Form */}
+        <div className="space-y-8">
+          {/* Add Task Section */}
           <motion.div 
-            className="lg:col-span-1"
+            className="w-full max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            <div className="glass-surface rounded-3xl p-8 sticky top-8">
+            <div className="glass-surface rounded-3xl p-8">
               <motion.h2 
                 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3"
                 layoutId="add-task-header"
@@ -184,14 +184,13 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Task Management */}
+          {/* Filters Section */}
           <motion.div 
-            className="lg:col-span-2 space-y-6"
+            className="w-full max-w-4xl mx-auto"
             variants={itemVariants}
           >
-            {/* Filters */}
             <div className="glass-surface rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-green-500 to-emerald-600 rounded-full"></div>
                 Filters & Search
               </h3>
@@ -205,8 +204,13 @@ export default function Home() {
                 stats={stats}
               />
             </div>
+          </motion.div>
 
-            {/* Task List */}
+          {/* Task List Section */}
+          <motion.div 
+            className="w-full max-w-4xl mx-auto"
+            variants={itemVariants}
+          >
             <div className="glass-surface rounded-3xl p-8">
               <motion.h2 
                 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3"

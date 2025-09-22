@@ -70,58 +70,60 @@ export default function TaskFilters({
       </motion.div>
 
       {/* Filter and Sort Controls */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0 lg:space-x-6">
+      <div className="space-y-6">
         {/* Filter Buttons */}
         <motion.div 
-          className="flex space-x-2"
+          className="w-full"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          {filterOptions.map((option, index) => {
-            const IconComponent = option.icon
-            const isActive = filter === option.value
-            const count = option.value === 'all' ? stats.total : 
-                         option.value === 'active' ? stats.active : stats.completed
-            
-            return (
-              <motion.button
-                key={option.value}
-                onClick={() => onFilterChange(option.value as TaskFilter)}
-                className={`relative px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200 flex items-center space-x-2 ${
-                  isActive
-                    ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg'
-                    : 'bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-800/80'
-                }`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-              >
-                <IconComponent className="w-4 h-4" />
-                <span>{option.label}</span>
-                <span className={`px-2 py-1 rounded-full text-xs font-bold ${
-                  isActive 
-                    ? 'bg-white/20 text-white' 
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                }`}>
-                  {count}
-                </span>
-                {isActive && (
-                  <motion.div
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-indigo-500 opacity-20"
-                    layoutId="filter-background"
-                  />
-                )}
-              </motion.button>
-            )
-          })}
+          <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
+            {filterOptions.map((option, index) => {
+              const IconComponent = option.icon
+              const isActive = filter === option.value
+              const count = option.value === 'all' ? stats.total : 
+                           option.value === 'active' ? stats.active : stats.completed
+              
+              return (
+                <motion.button
+                  key={option.value}
+                  onClick={() => onFilterChange(option.value as TaskFilter)}
+                  className={`relative px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200 flex items-center space-x-2 min-w-[120px] justify-center ${
+                    isActive
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg'
+                      : 'bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-800/80'
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span>{option.label}</span>
+                  <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                    isActive 
+                      ? 'bg-white/20 text-white' 
+                      : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                  }`}>
+                    {count}
+                  </span>
+                  {isActive && (
+                    <motion.div
+                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-indigo-500 opacity-20"
+                      layoutId="filter-background"
+                    />
+                  )}
+                </motion.button>
+              )
+            })}
+          </div>
         </motion.div>
 
         {/* Sort Dropdown */}
         <motion.div
-          className="flex items-center space-x-3"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
@@ -130,11 +132,11 @@ export default function TaskFilters({
             <SortAsc className="w-4 h-4" />
             <span className="text-sm font-medium">Sort by:</span>
           </div>
-          <div className="relative">
+          <div className="relative min-w-[200px]">
             <select
               value={sort}
               onChange={(e) => onSortChange(e.target.value as TaskSort)}
-              className="appearance-none bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-900 dark:text-white px-4 py-3 pr-10 rounded-xl border-0 focus:ring-2 focus:ring-blue-500/30 transition-all duration-200 shadow-sm cursor-pointer"
+              className="appearance-none w-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-900 dark:text-white px-4 py-3 pr-10 rounded-xl border-0 focus:ring-2 focus:ring-blue-500/30 transition-all duration-200 shadow-sm cursor-pointer"
             >
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>

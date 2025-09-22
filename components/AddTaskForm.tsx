@@ -127,10 +127,10 @@ export default function AddTaskForm({ onAdd, isLoading = false }: AddTaskFormPro
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">
             Priority Level
           </label>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {Object.entries(priorityConfig).map(([value, config]) => {
               const IconComponent = config.icon
               const isSelected = priority === value
@@ -140,7 +140,7 @@ export default function AddTaskForm({ onAdd, isLoading = false }: AddTaskFormPro
                   key={value}
                   type="button"
                   onClick={() => setPriority(value as Priority)}
-                  className={`relative p-4 rounded-xl border-2 transition-all duration-200 group ${
+                  className={`relative p-4 rounded-xl border-2 transition-all duration-200 group w-full ${
                     isSelected 
                       ? `${config.bg} border-current ${config.color} shadow-md scale-105` 
                       : 'bg-white/50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
@@ -149,10 +149,10 @@ export default function AddTaskForm({ onAdd, isLoading = false }: AddTaskFormPro
                   whileHover={{ scale: isSelected ? 1.05 : 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex flex-col items-center space-y-2">
+                  <div className="flex flex-col items-center space-y-3">
                     <IconComponent className={`w-6 h-6 ${isSelected ? config.color : 'text-gray-400'}`} />
-                    <span className={`text-xs font-medium ${isSelected ? config.color : 'text-gray-600 dark:text-gray-400'}`}>
-                      {config.label.split(' ')[0]}
+                    <span className={`text-sm font-medium text-center ${isSelected ? config.color : 'text-gray-600 dark:text-gray-400'}`}>
+                      {config.label}
                     </span>
                   </div>
                   {isSelected && (
