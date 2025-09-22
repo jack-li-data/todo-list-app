@@ -1,33 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# To-Do List App
+
+A full-featured, modern to-do list application built with Next.js, TypeScript, Prisma, and Tailwind CSS. Features real-time task management with GitHub sync and deployment to Vercel.
+
+## Features
+
+- ✅ **Create, Edit, Delete Tasks** - Full CRUD operations for task management
+- 🏷️ **Priority Levels** - Organize tasks with Low, Medium, and High priority
+- 🔍 **Search & Filter** - Find tasks by keyword and filter by status (All/Active/Completed)
+- 📊 **Progress Tracking** - Visual progress bar and completion statistics
+- 🎯 **Sorting Options** - Sort by date, title, or priority
+- 📱 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+- 🚀 **Real-time Updates** - Instant UI updates for all operations
+- 💾 **Data Persistence** - SQLite database with Prisma ORM
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **Backend**: Next.js API routes
+- **Database**: SQLite with Prisma ORM
+- **Deployment**: Vercel
+- **Styling**: Tailwind CSS with responsive design
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18.x or later
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd todo-list
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up the database:
+```bash
+npx prisma db push
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Method 1: Automatic Deployment (Recommended)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push your code to GitHub
+2. Connect your GitHub repository to Vercel
+3. Vercel will automatically deploy on every push to main branch
+
+### Method 2: Manual Deployment
+
+1. Install Vercel CLI:
+```bash
+npm i -g vercel
+```
+
+2. Deploy to Vercel:
+```bash
+vercel
+```
+
+3. Follow the prompts to configure your deployment
+
+### Environment Variables
+
+No additional environment variables are required for basic deployment. The app uses SQLite which is suitable for small to medium applications.
+
+For production with PostgreSQL, add:
+```
+DATABASE_URL="postgresql://username:password@localhost:5432/todolist?schema=public"
+```
+
+## API Routes
+
+The application provides a RESTful API:
+
+- `GET /api/tasks` - Get all tasks (with optional filtering and sorting)
+- `POST /api/tasks` - Create a new task
+- `GET /api/tasks/[id]` - Get a specific task
+- `PUT /api/tasks/[id]` - Update a task
+- `DELETE /api/tasks/[id]` - Delete a task
+
+### Query Parameters for GET /api/tasks:
+
+- `filter`: 'all' | 'active' | 'completed'
+- `sort`: 'date' | 'title' | 'priority'
+- `search`: string (searches title and description)
+
+## Project Structure
+
+```
+├── app/
+│   ├── api/tasks/          # API routes for task operations
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Main page component
+├── components/
+│   ├── AddTaskForm.tsx     # Form for creating new tasks
+│   ├── TaskFilters.tsx     # Filtering and search controls
+│   ├── TaskItem.tsx        # Individual task display and editing
+│   └── TaskList.tsx        # Task list container
+├── hooks/
+│   └── useTasks.ts         # Custom hook for task management
+├── lib/
+│   └── prisma.ts           # Prisma client configuration
+├── prisma/
+│   └── schema.prisma       # Database schema
+├── types/
+│   └── task.ts             # TypeScript type definitions
+└── public/                 # Static assets
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes
+4. Commit your changes: `git commit -m 'Add some feature'`
+5. Push to the branch: `git push origin feature-name`
+6. Open a pull request
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Support
+
+If you encounter any issues or have questions, please open an issue on GitHub.
 
 ## Deploy on Vercel
 
