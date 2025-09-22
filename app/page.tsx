@@ -53,15 +53,31 @@ export default function Home() {
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-900"
+      className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-900 relative"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
+      {/* Centered Tagline - Fixed Position */}
+      <motion.div 
+        className="fixed inset-0 flex items-center justify-center pointer-events-none z-0"
+        variants={itemVariants}
+      >
+        <motion.p 
+          className="text-xl text-gray-600 dark:text-gray-300 font-medium leading-relaxed text-center max-w-2xl px-6 backdrop-blur-sm bg-white/5 dark:bg-gray-900/5 rounded-2xl py-4"
+          variants={itemVariants}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          Experience the future of productivity with our Tesla-inspired task management interface
+        </motion.p>
+      </motion.div>
+
+      <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header Section - Compact */}
         <motion.header 
-          className="text-center mb-12"
+          className="text-center mb-8"
           variants={itemVariants}
         >
           <motion.div
@@ -70,106 +86,92 @@ export default function Home() {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="relative">
-              <Sparkles className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+              <Sparkles className="w-8 h-8 text-blue-600 dark:text-blue-400" />
               <motion.div
-                className="absolute inset-0 w-10 h-10 text-blue-400 dark:text-blue-300"
+                className="absolute inset-0 w-8 h-8 text-blue-400 dark:text-blue-300"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                <Sparkles className="w-10 h-10" />
+                <Sparkles className="w-8 h-8" />
               </motion.div>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-600 dark:from-white dark:via-blue-200 dark:to-indigo-400 bg-clip-text text-transparent tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-600 dark:from-white dark:via-blue-200 dark:to-indigo-400 bg-clip-text text-transparent tracking-tight">
               Nexus Tasks
             </h1>
           </motion.div>
-          <motion.p 
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-medium leading-relaxed"
-            variants={itemVariants}
-          >
-            Experience the future of productivity with our Tesla-inspired task management interface
-          </motion.p>
         </motion.header>
 
-        {/* Stats Dashboard */}
+        {/* Compact Stats Dashboard */}
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+          className="flex justify-center mb-8"
           variants={itemVariants}
         >
-          <motion.div 
-            className="glass-surface rounded-2xl p-6 text-center group overflow-hidden relative"
-            whileHover={{ scale: 1.02, y: -4 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-            <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 mb-4 group-hover:shadow-lg transition-shadow">
-                <Clock className="w-7 h-7 text-white" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stats.total}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Total Tasks</div>
-            </div>
-          </motion.div>
+          <div className="glass-surface rounded-2xl p-4">
+            <div className="flex items-center gap-6">
+              <motion.div 
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-gray-900 dark:text-white">{stats.total}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Total</div>
+                </div>
+              </motion.div>
 
-          <motion.div 
-            className="glass-surface rounded-2xl p-6 text-center group overflow-hidden relative"
-            whileHover={{ scale: 1.02, y: -4 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-            <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 mb-4 group-hover:shadow-lg transition-shadow">
-                <Zap className="w-7 h-7 text-white" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stats.completed}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Completed</div>
-            </div>
-          </motion.div>
+              <motion.div 
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-gray-900 dark:text-white">{stats.completed}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Done</div>
+                </div>
+              </motion.div>
 
-          <motion.div 
-            className="glass-surface rounded-2xl p-6 text-center group overflow-hidden relative"
-            whileHover={{ scale: 1.02, y: -4 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-            <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 mb-4 group-hover:shadow-lg transition-shadow">
-                <Clock className="w-7 h-7 text-white" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stats.active}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Active</div>
-            </div>
-          </motion.div>
+              <motion.div 
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-gray-900 dark:text-white">{stats.active}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Active</div>
+                </div>
+              </motion.div>
 
-          <motion.div 
-            className="glass-surface rounded-2xl p-6 text-center group overflow-hidden relative"
-            whileHover={{ scale: 1.02, y: -4 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
-            <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-600 mb-4 group-hover:shadow-lg transition-shadow">
-                <TrendingUp className="w-7 h-7 text-white" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{completionRate}%</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Progress</div>
+              <motion.div 
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-gray-900 dark:text-white">{completionRate}%</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Progress</div>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
 
-        {/* Main Content */}
-        <div className="space-y-8">
+        {/* Main Content - Centered Layout */}
+        <div className="min-h-screen flex flex-col justify-center items-center space-y-8 pt-20 pb-20">
           {/* Add Task Section */}
           <motion.div 
-            className="w-full max-w-2xl mx-auto"
+            className="w-full max-w-2xl"
             variants={itemVariants}
           >
             <div className="glass-surface rounded-3xl p-8">
@@ -186,7 +188,7 @@ export default function Home() {
 
           {/* Filters Section */}
           <motion.div 
-            className="w-full max-w-4xl mx-auto"
+            className="w-full max-w-2xl"
             variants={itemVariants}
           >
             <div className="glass-surface rounded-2xl p-6">
@@ -208,7 +210,7 @@ export default function Home() {
 
           {/* Task List Section */}
           <motion.div 
-            className="w-full max-w-4xl mx-auto"
+            className="w-full max-w-2xl"
             variants={itemVariants}
           >
             <div className="glass-surface rounded-3xl p-8">
@@ -257,13 +259,16 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Footer */}
+        {/* Footer - Minimal */}
         <motion.footer 
-          className="text-center mt-16 pb-8"
+          className="fixed bottom-4 right-4 z-20"
           variants={itemVariants}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
         >
-          <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-            Crafted with precision for productivity enthusiasts
+          <p className="text-gray-400 dark:text-gray-600 text-xs font-medium bg-white/10 dark:bg-gray-900/20 backdrop-blur-sm rounded-lg px-3 py-1">
+            Nexus Productivity
           </p>
         </motion.footer>
       </div>
