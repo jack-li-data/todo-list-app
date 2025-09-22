@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { TaskStorage } from '@/lib/taskStorage'
 import { CreateTaskRequest, TaskFilter, TaskSort } from '@/types/task'
 import { Priority } from '@prisma/client'
 
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
         break
     }
 
-    const tasks = await prisma.task.findMany({
+    const tasks = await TaskStorage.findMany({
       where,
       orderBy
     })
@@ -69,10 +69,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const task = await prisma.task.create({
+    const task = await TaskStorage.create({
       data: {
         title: body.title.trim(),
-        description: body.description?.trim() || null,
+        description: body.description?.trim() || undefined,
         priority: body.priority || Priority.MEDIUM
       }
     })

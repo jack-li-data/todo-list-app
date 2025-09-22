@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { TaskStorage } from '@/lib/taskStorage'
 import { UpdateTaskRequest } from '@/types/task'
 
 export async function GET(
@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params
-    const task = await prisma.task.findUnique({
+    const task = await TaskStorage.findUnique({
       where: { id }
     })
 
@@ -38,7 +38,7 @@ export async function PUT(
     const body: UpdateTaskRequest = await request.json()
 
     // Check if task exists
-    const existingTask = await prisma.task.findUnique({
+    const existingTask = await TaskStorage.findUnique({
       where: { id }
     })
 
@@ -74,7 +74,7 @@ export async function PUT(
       updateData.priority = body.priority
     }
 
-    const task = await prisma.task.update({
+    const task = await TaskStorage.update({
       where: { id },
       data: updateData
     })
@@ -97,7 +97,7 @@ export async function DELETE(
     const { id } = await params
     
     // Check if task exists
-    const existingTask = await prisma.task.findUnique({
+    const existingTask = await TaskStorage.findUnique({
       where: { id }
     })
 
@@ -108,7 +108,7 @@ export async function DELETE(
       )
     }
 
-    await prisma.task.delete({
+    await TaskStorage.delete({
       where: { id }
     })
 
